@@ -1,5 +1,6 @@
 package com.wxy.test;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,9 +8,15 @@ import java.util.Scanner;
 public class MyBookMain {
     public  static   Mybook[] books=new Mybook[200];
     public  static  List<Mybook> list=new ArrayList<>();
+    public  static File file=new File("f:/books");
     //main方法
     public static void main(String[] args) {
-        inputData(list);
+        if (!file.exists()) {      //判断是否有books文件，如果没有就创建
+            inputData(list);
+            save();
+        }else {
+            read();                //如果已经有books文件，经执行read，往里写
+        }
          menu();
 
     }
@@ -47,6 +54,7 @@ public class MyBookMain {
     //录入图书
     public static void inputData(List<Mybook> books){
         Scanner scanner=new Scanner(System.in);
+        System.out.print("首次运行系统，请输入初始化数据");
         int n=scanner.nextInt();
         for (int i=1;i<=n;i++){
             Mybook mybook=new Mybook("书名"+i,Double.valueOf(String.valueOf(i)),"出版社"+i,"作者"+i,"ISBN"+i);
@@ -81,6 +89,7 @@ public class MyBookMain {
             if (mybook.getName().equals(name)){
                 books.remove(i);
                 System.out.println("删除成功");
+                save();
                 menu();
                 return;
             }
@@ -103,7 +112,59 @@ public class MyBookMain {
         String bookISBN=scanner.next();
         Mybook  mybook=new Mybook(name,price,press,author,bookISBN);
         books.add(mybook);
+        save();
         System.out.println("添加成功");
         menu();
+    }
+    //输出流 存数据
+    public static void save(){
+        OutputStream os=null;
+        ObjectOutputStream oos=null;
+        try {
+             os=new FileOutputStream(file);
+             oos=new ObjectOutputStream(os);
+             oos.writeObject(list);
+             oos.flush();
+             os.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (oos!=null)
+                     oos.close();
+                if (os!=null)
+                     os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //输入流
+    public static void read(){
+        InputStream is= null;
+        ObjectInputStream ois=null;
+        try {
+            is = new FileInputStream(file);
+            ois=new ObjectInputStream(is);
+           list= (List<Mybook>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois!=null)
+                      ois.close();
+                if (is!=null)
+                    is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
