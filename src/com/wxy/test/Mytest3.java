@@ -1,8 +1,10 @@
 package com.wxy.test;
 
+import javafx.scene.transform.Scale;
 import jdk.internal.util.xml.impl.Input;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Mytest3 {
     public static void main(String[] args) {
@@ -65,7 +67,7 @@ public class Mytest3 {
             e.printStackTrace();
         }*/
        //字节输入流
-        InputStream inputStream=null;
+       /* InputStream inputStream=null;
         try {
             inputStream=new FileInputStream("f:a.txt");
             byte[] b=new byte[100];
@@ -83,7 +85,53 @@ public class Mytest3 {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }*/
+
+
+       /**
+        * 输出斐波那契数列  以 1 1 开头 后面每一位都是前两位之和
+        * 1 1 2 3 5 8 13
+        *
+        **/
+       /* Scanner scanner=new Scanner(System.in);
+        int n=scanner.nextInt();
+        System.out.println(method(n));*/
+
+        /**
+         * 一个球从100米高度落下，每次落地后反弹到原高度的一半，求第10次落地后 反弹多高
+         *
+         *
+         * */
+        /*System.out.println(method2(100));*/
+        /**
+         * 一个整数 加100后是一个完全平方数 再加168也是一个完全平方数 该数是多少
+         *
+         * */
+        for (int i=1;i<10000;i++){
+
+           int x=(int)Math.sqrt(i+100);
+            int y=(int)Math.sqrt(i+168);
+            if (x*x==i+100&&y*y==i+168)
+                  System.out.println(i);
         }
 
     }
+    //定义一个method方法  输出第n个斐波那契数
+   /* public static int method(int n){
+        if (n==1||n==2){
+            return 1;
+        }else {
+            int a=1,b=1,sum;
+            for (int i=2;i<n;i++){
+                sum=a+b;
+                a=b;
+                b=sum;
+            }
+            return b;
+        }
+
+    }*/
+
+
+
 }

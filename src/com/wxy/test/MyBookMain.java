@@ -22,7 +22,7 @@ public class MyBookMain {
     }
     //菜单
     public static void menu(){
-        System.out.println("输出菜单项请选择你要进行的操作（请输入1-4中的任一个数字）");
+        System.out.println("输入菜单项请选择你要进行的操作（请输入1-4中的任一个数字）");
         System.out.println("1：添加图书");
         System.out.println("2：删除图书");
         System.out.println("3：查找图书（根据书名）");
