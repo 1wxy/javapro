@@ -29,7 +29,7 @@ public class Mytest {
                p=p+b;
             }
             System.out.print(p);*/
-     /* int sum=0;
+     /*int sum=0;
       for (int i=2;i<=100;i++) {
           boolean flag=true;
           for (int a = 2; a < i; a++){
@@ -97,7 +97,7 @@ public class Mytest {
 
         //两个正整数  计算最大公约数和最小公倍数
         //公约数
-       int a=600;
+      /*int a=600;
         int b=256;
         int max=1;
         for (int i=1;i<a&&i<b;i++){
@@ -114,7 +114,7 @@ public class Mytest {
                 break;
             }
         }
-        System.out.println(min);
+        System.out.println(min);*/
 
     }
 
