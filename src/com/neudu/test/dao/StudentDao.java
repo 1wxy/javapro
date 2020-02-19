@@ -1,6 +1,7 @@
 package com.neudu.test.dao;
 
 import com.neudu.test.pojo.Student;
+import com.neudu.test.util.JdbcUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -63,7 +64,18 @@ public class StudentDao implements IStudentDao {
     @Override
     //添加信息
     public int add(Student student) {
-        Connection con=null;
+        //3、最简方法  第2种方法 JdbcUtil.executeUpdate（）定义了动态数组
+        return JdbcUtil.executeUpdate("insert into Student(Sno,Sname,Sex,Sage) values(?,?,?,?)",student.getSno(),student.getSname(),student.getSex(),student.getSage());
+
+        //2、封装共同增删改后的方法
+       /* String sql="insert into Student(Sno,Sname,Sex,Sage) values(?,?,?,?)";
+        Object[] params={student.getSno(),student.getSname(),student.getSex(),student.getSage()};
+        int i=JdbcUtil.executeUpdate(sql,params);
+        return i;*/
+
+
+        //1、最复杂方法
+       /* Connection con=null;
         PreparedStatement pstmt=null;
         int i=0;
         try {
@@ -94,12 +106,23 @@ public class StudentDao implements IStudentDao {
                 e.printStackTrace();
             }
         }
-        return i;
+        return i;*/
     }
 
     @Override
+    //修改信息
     public int updata(Student student) {
-        Connection con=null;
+        //3、最简方法  第2种方法 JdbcUtil.executeUpdate（）定义了动态数组
+        return JdbcUtil.executeUpdate("update Student set Sname=?,Sex=?,Sage=? where Sno=?",student.getSname(),student.getSex(),student.getSage(),student.getSno());
+
+        //2、封装共同增删改后的方法
+        /*String sql="update Student set Sname=?,Sex=?,Sage=? where Sno=?";
+        Object[] params={student.getSname(),student.getSex(),student.getSage(),student.getSno()};
+        int i=JdbcUtil.executeUpdate(sql,params);
+        return i;*/
+
+        //1、最复杂方法
+       /* Connection con=null;
         PreparedStatement pstmt=null;
         int i=0;
         try {
@@ -130,12 +153,23 @@ public class StudentDao implements IStudentDao {
                 e.printStackTrace();
             }
         }
-        return i;
+        return i;*/
     }
 
     @Override
+    //删除信息
     public int del(int Sno) {
-        Connection con=null;
+        //3、最简方法  第2种方法 JdbcUtil.executeUpdate（）定义了动态数组
+        return JdbcUtil.executeUpdate("delete from Student where Sno=?",Sno);
+
+        //2、封装增删改后的方法
+     /*   String sql="delete from Student where Sno=?";
+        Object[] params={Sno};
+        int i=JdbcUtil.executeUpdate(sql,params);
+        return i;*/
+
+        //1、最复发方法
+        /*Connection con=null;
         PreparedStatement pstmt=null;
         int i=0;
         try {
@@ -163,7 +197,7 @@ public class StudentDao implements IStudentDao {
                 e.printStackTrace();
             }
         }
-        return i;
+        return i;*/
     }
 
     @Override
